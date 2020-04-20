@@ -1,0 +1,48 @@
+<h1>サプライズ詳細</h1>
+
+<% unless @surprise.order.nil? %>
+  <p>sold out</p>
+<% end %>
+
+<% if @surprise.is_active == true %>
+  <p>出品中</p>
+<% else %>
+  <p>出品停止中</p>
+<% end %>
+
+<%= attachment_image_tag @surprise, :main_image, :fill, 100, 100, fallback: "no_image.jpg", size: "100x100" %>
+<% @surprise.surprise_images.each do |sub_image| %>
+  <%= attachment_image_tag sub_image, :image, :fill, 100, 100, size: "100x100" %>
+<% end %>
+
+<%= link_to admin_user_path(@surprise.user) do %>
+  <p>
+    <%= attachment_image_tag @surprise.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: "40x40" %> 
+    <%= @surprise.user.name %>
+  </p>
+<% end %>
+
+<h3>サプライズ名：<%= @surprise.name %></h3>
+<p>サプライズ説明：<%= @surprise.description %></p>
+<p>価格：<%= @surprise.price %></p>
+<p>日付：<%= @surprise.days %></p>
+
+<p>対象地域：
+  <% @surprise.target_areas.each do |area| %>
+    <%= area.name %>
+  <% end %>
+</p>
+
+<h3>コメント一覧</h3>
+<% @surprise.surprise_messages.each do |comment| %>
+  <%= comment.user.name %>
+  <%= comment.text %>
+<% end %>
+
+<%= link_to "編集", edit_admin_surprise_path(@surprise) %>
+
+<% if @surprise.is_active == true %>
+  <%= link_to "出品停止", admin_surprise_path(@surprise, flag: true), method: :patch %>
+<% else %>
+  <%= link_to "出品再開", admin_surprise_path(@surprise, flag: false), method: :patch %>
+<% end %>

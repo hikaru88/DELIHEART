@@ -1,0 +1,20 @@
+<h1>サプライズ編集</h1>
+<%= form_with(model: @surprise, local: true, url: admin_surprise_path) do |f| %>
+  <p>サプライズ名：<%= f.text_field :name %></p>
+  <p>サプライズ説明：<%= f.text_area :description %></p>
+  <p>価格：<%= f.text_field :price %></p>
+  <p>実施年：<%= f.text_field :year %></p>
+  <p>実施月：<%= f.text_field :month %></p>
+  <p>実施日：<%= f.text_field :day %></p>
+
+  <div>
+    <%= f.fields_for :target_areas do |area| %>
+      <%= render 'admin/surprises/partial/target_area_fields', f: area %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association "add area", f, :target_areas, partial: "admin/surprises/partial/target_area_fields" %>
+    </div>
+  </div>
+
+  <p><%= f.submit "変更する" %></p>
+<% end %>
