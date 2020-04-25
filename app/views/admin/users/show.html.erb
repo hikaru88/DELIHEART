@@ -47,3 +47,6 @@
 <% else %>
   <%= link_to "アカウント停止解除", admin_user_path(@user), method: :patch %>
 <% end %>
+
+<%= link_to "お知らせメッセージ作成", admin_notices_new_path(@user) %>
+<%= link_to "お知らせメッセージ一覧", admin_notices_path(@user) %>

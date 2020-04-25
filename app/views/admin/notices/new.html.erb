@@ -1,0 +1,7 @@
+<h1>お知らせメッセージ作成ページ</h1>
+
+<%= form_with(model: @notice_new, local: true, url: admin_notices_create_path(@notice_new.user_id)) do |f| %>
+  <p>タイトル：<%= f.text_field :title %></p>
+  <p>お知らせ内容：<%= f.text_field :text %></p>
+  <p><%= f.submit "お知らせ送信" %></p>
+<% end %>

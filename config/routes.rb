@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     get    ':user_id/notices/new', to: 'notices#new', as: 'notices_new'
     get    ':user_id/notices', to: 'notices#index', as: 'notices'
     post   ':user_id/notices', to: 'notices#create', as: 'notices_create'
-    get    ':notices/:id', to: 'notices#show', as: 'notice'
+    get    'notices/:id', to: 'notices#show', as: 'notice'
 
     # reviews
     get    ':user_id/reviews', to: 'reviews#index', as: 'reviews'

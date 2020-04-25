@@ -1,0 +1,8 @@
+<h1>エンドユーザーに紐づいたお知らせ一覧ページ</h1>
+<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: "100x100" %>
+<p>ユーザー名：<%= link_to @user.name, admin_user_path(@user) %></p>
+
+<% @user.notices.each do |notice| %>
+  <p><%= l notice.created_at, format: :short %></p>
+  <p><%= link_to notice.title, admin_notice_path(notice) %></p>
+<% end %>
