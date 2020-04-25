@@ -39,8 +39,6 @@
   <%= comment.text %>
 <% end %>
 
-<%= link_to "編集", edit_admin_surprise_path(@surprise) %>
-
 <% if @surprise.is_active == true %>
   <%= link_to "出品停止", admin_surprise_path(@surprise, flag: true), method: :patch %>
 <% else %>
