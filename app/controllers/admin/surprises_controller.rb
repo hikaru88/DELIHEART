@@ -35,14 +35,16 @@ class Admin::SurprisesController < ApplicationController
 
   def destroy
     @surprise = Surprise.find(params[:id])
-    @surprise.delete
+    @surprise.destroy
+    redirect_to admin_surprise_delete_complete_path
   end
 
   def destroy_complete
+    # 削除されたサプライズの出品ユーザーにメッセージを送るフォームを表示するページ
   end
 
   private
     def surprise_params
-      params.require(:surprise).permit(:name, :description, :price, :year, :month, :day, :main_image)
+      params.require(:surprise).permit(:name, :description, :price, :year, :month, :day, :main_image, target_areas_attributes: [:id, :name])
     end
 end

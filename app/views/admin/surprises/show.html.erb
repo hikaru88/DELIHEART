@@ -46,3 +46,5 @@
 <% else %>
   <%= link_to "出品再開", admin_surprise_path(@surprise, flag: false), method: :patch %>
 <% end %>
+
+<%= link_to "削除", admin_surprise_path(@surprise), method: :delete %>
