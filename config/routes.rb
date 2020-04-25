@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
     # cancel_requests
     resources :cancel_requests, only: [ :index, :show ]
-    get    'cancel_requests/reject', to: 'cancel_requests#reject'
+    get    'cancel_requests/:id/reject', to: 'cancel_requests#reject'
   end
 
 

@@ -1,0 +1,7 @@
+<h1>キャンセルリクエスト詳細</h1>
+<p>キャンセルリクエスト送信日時：<%= l @cancel_request.created_at, format: :short %></p>
+<p><%= link_to @cancel_request.user.name, admin_user_path(@cancel_request.user) %>さんからのキャンセルリクエスト</p>
+<p><%= link_to "ID：#{@cancel_request.order.id}", admin_order_path(@cancel_request.order) %>の取引のキャンセルリクエスト</p>
+<p>キャンセル理由：<%= @cancel_request.reason %></p>
+<p><%= link_to "キャンセルリクエストを承認する", admin_order_path(@cancel_request.order), method: :delete %></p>
+<p><%= link_to "キャンセルリクエストを却下する", admin_cancel_requests_reject_path(@cancel_request) %></p>
