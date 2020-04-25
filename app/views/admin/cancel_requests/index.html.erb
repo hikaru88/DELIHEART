@@ -1,0 +1,5 @@
+<h1>キャンセルリクエスト一覧</h1>
+<% @cancel_requests.each do |request| %>
+  <%= l request.created_at, format: :short %>
+  <p><%= link_to request.user.name, admin_cancel_request_path(request) %>さんからのキャンセルリクエスト</p>
+<% end %>
