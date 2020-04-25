@@ -14,9 +14,10 @@ class Admin::SurprisesController < ApplicationController
     # もしサプライズ投稿できるようにする場合、Surprise.user_idはどうするか？
   end
 
-  def edit
-    @surprise = Surprise.find(params[:id])
-  end
+  # 編集ページは無くす
+  # def edit
+  #   @surprise = Surprise.find(params[:id])
+  # end
 
   def update
     @surprise = Surprise.find(params[:id])
@@ -27,9 +28,9 @@ class Admin::SurprisesController < ApplicationController
     elsif params[:flag] == "false"
       @surprise.update(is_active: true)
       redirect_to admin_surprise_path(@surprise)
-    else
-      @surprise.update(surprise_params)
-      redirect_to admin_surprise_path(@surprise)
+    # else
+    #   @surprise.update(surprise_params)
+    #   redirect_to admin_surprise_path(@surprise)
     end
   end
 
@@ -43,8 +44,8 @@ class Admin::SurprisesController < ApplicationController
     # 削除されたサプライズの出品ユーザーにメッセージを送るフォームを表示するページ
   end
 
-  private
-    def surprise_params
-      params.require(:surprise).permit(:name, :description, :price, :year, :month, :day, :main_image, target_areas_attributes: [:id, :name])
-    end
+  # private
+  #   def surprise_params
+  #     params.require(:surprise).permit(:name, :description, :price, :year, :month, :day, :main_image, target_areas_attributes: [:id, :name])
+  #   end
 end

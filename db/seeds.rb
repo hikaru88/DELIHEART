@@ -29,3 +29,15 @@ end
     name: rand(0..9)
   )
 end
+
+5.times do |n|
+  Address.create!(
+    user_id: n + 1,
+    receiver: "田中太郎",
+    postal_code: "3330000",
+    prefecture: n,
+    city: "青木町",
+    after: "1-10-10 ライオンズマンション602",
+    is_default: true
+  )
+end

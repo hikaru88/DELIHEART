@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
     t.integer "prefecture", null: false
     t.string "city", null: false
     t.string "after", null: false
+    t.boolean "is_default", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

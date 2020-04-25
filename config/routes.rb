@@ -12,13 +12,13 @@ Rails.application.routes.draw do
   namespace :admin do
 
     # users
-    resources :users, only: [ :index, :show, :edit, :update ]
+    resources :users, only: [ :index, :show, :update ]
     patch  'users/:id/delete', to: 'users#destroy', as: 'user_delete'
-    get    'users/delete_complete', to: 'users#destroy_complete', as: 'user_delete_complete'
+    get    'user/delete_complete', to: 'users#destroy_complete', as: 'user_delete_complete'
 
     # surprises
-    resources :surprises, only: [ :index, :show, :new, :edit, :update, :destroy ]
-    get    'surprises/delete_complete', to: 'surprises#destroy_complete', as: 'surprise_delete_complete'
+    resources :surprises, only: [ :index, :show, :new, :update, :destroy ]
+    get    'surprise/delete_complete', to: 'surprises#destroy_complete', as: 'surprise_delete_complete'
 
     # surprise_favorites
     get    'users/:user_id/surprise_favorites', to: 'surprise_favorites#index', as: 'surprise_favorites'

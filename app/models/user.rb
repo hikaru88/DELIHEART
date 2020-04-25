@@ -17,8 +17,10 @@ class User < ApplicationRecord
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed
   has_many :follower_user, through: :followed, source: :follower
-  has_many :from_user, class_name: "Reviews", foreign_key: "from_user_id", dependent: :nullify
-  has_many :to_user, class_name: "Reviews", foreign_key: "to_user_id", dependent: :destroy
+  has_many :from_user, class_name: "Review", foreign_key: "from_user_id", dependent: :nullify
+  has_many :to_user, class_name: "Review", foreign_key: "to_user_id", dependent: :destroy
+  has_many :send_review, through: :to_user, source: :from_user
+  has_many :receive_review, through: :from_user, source: :to_user
 
   attachment :profile_image
 end
