@@ -1,0 +1,5 @@
+<h1>お知らせ詳細</h1>
+<p>ユーザ名：<%= link_to @notice.user.name, admin_user_path(@notice.user) %></p>
+<p><%= l @notice.created_at, format: :short %></p>
+<p>タイトル：<%= @notice.title %></p>
+<p>本文：<%= @notice.text %></p>

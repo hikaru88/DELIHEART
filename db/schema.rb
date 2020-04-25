@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
 
   create_table "notices", force: :cascade do |t|
     t.integer "user_id"
+    t.string "title", null: false
     t.text "text", null: false
     t.boolean "already_read", default: false, null: false
     t.datetime "created_at", null: false
