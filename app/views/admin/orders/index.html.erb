@@ -1,0 +1,6 @@
+<h1>現在行われている取引一覧</h1>
+<% @orders.each do |order| %>
+  <p>ID <%= order.id %></p>
+  <p><%= l order.created_at, format: :short %><p>
+  <p><%= "サプライズ名：#{order.surprise.name}", admin_order_path(order) %>の取引</p>
+<% end %>

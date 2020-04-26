@@ -19,7 +19,8 @@ end
     price: n * 1000,
     year: 2020,
     month: 12,
-    day: 31
+    day: 31,
+    postage: 0
   )
 end
 
