@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     # reviews
     get    ':user_id/reviews', to: 'reviews#index', as: 'reviews'
     delete 'reviews/:id', to: 'reviews#destroy', as: 'reviews_delete'
+    get    'review/delete_complete', to: 'reviews#destroy_complete', as: 'review_delete_complete'
 
     # cancel_requests
     resources :cancel_requests, only: [ :index, :show ]
