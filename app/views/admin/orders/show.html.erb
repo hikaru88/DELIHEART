@@ -1,0 +1,39 @@
+<h1>取引詳細</h1>
+
+<h3>取引状況</h3>
+<p><%= @order.status %></p>
+
+<h3>出品者情報</h3>
+<%= link_to admin_user_path(@seller) do %>
+  <p>
+    <%= attachment_image_tag @seller, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+    <%= @seller.name %>
+  </p>
+<% end %>
+
+<h3>購入者情報</h3>
+<%= link_to admin_user_path(@buyer) do %>
+  <p>
+    <%= attachment_image_tag @buyer, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+    <%= @buyer.name %>
+  </p>
+<% end %>
+
+<h3>取引情報</h3>
+<h5>商品名：<%= @order.name %></h5>
+<p>商品代金：<%= @order.surprise.price %></p>
+<p>送料：<%= @order.surprise.postage %></p>
+<p>購入日時：<%= l @order.created_at, format: :short %></p>
+<p>支払い方法：<%= @order.payment_method %></p>
+<p>お届け先住所：</p>
+<p>〒<%= @order.postal_code %></p>
+<p>　<%= @order.address %></p>
+
+<h3>取引メッセージ</h3>
+<% @order.order_messages.each do |message| %>
+  <%= l message.created_at, format: :short %>
+  <%= message.user.name %>
+  <%= message.text %>
+<% end %>
+
+<%= link_to "取引停止", admin_order_path(@order), method: :delete %>

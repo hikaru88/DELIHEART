@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
     # orders
     resources :orders, only: [ :index, :show, :destroy ]
+    get    'admin/order/destroy_complete', to: 'orders#destroy_complete', as: 'order_delete_complete'
 
     # notices
     get    ':user_id/notices/new', to: 'notices#new', as: 'notices_new'

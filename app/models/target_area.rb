@@ -1,7 +1,7 @@
 class TargetArea < ApplicationRecord
   belongs_to :surprise
 
-  enum name:{
+  enum name: {
 	  全国: 0,
     北海道: 1,
     東北: 2,

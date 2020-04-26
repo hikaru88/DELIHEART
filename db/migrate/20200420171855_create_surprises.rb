@@ -10,6 +10,7 @@ class CreateSurprises < ActiveRecord::Migration[5.2]
       t.integer :day, null: false
       t.boolean :is_active, default: true, null: false
       t.string :main_image_id
+      t.integer :postage, null: false
 
       t.timestamps
     end

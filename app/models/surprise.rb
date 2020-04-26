@@ -13,4 +13,9 @@ class Surprise < ApplicationRecord
   def days
     "#{self.year}年 / #{self.month}月 / #{self.day}日"
   end
+
+  enum postage: {
+    出品者負担: 0,
+    購入者負担: 1
+  }
 end

@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
     t.integer "day", null: false
     t.boolean "is_active", default: true, null: false
     t.string "main_image_id"
+    t.integer "postage", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_surprises_on_name"
