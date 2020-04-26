@@ -5,7 +5,8 @@
 <p>自己紹介文：<%= @user.introduction %></p>
 <p>フォロー：<%= @user.following_user.count %></p>
 <p>フォロワー：<%= @user.follower_user.count %></p>
-<p>レビュー数：<%= @user.receive_review.count %></p>
+<p>レビュー数：<%= link_to @user.to_user.count, admin_reviews_path(@user) %></p>
+<p><%= link_to "いいねした出品", admin_surprise_favorites_path(@user) %></p>
 
 
 <h3>出品サプライズ一覧</h3>

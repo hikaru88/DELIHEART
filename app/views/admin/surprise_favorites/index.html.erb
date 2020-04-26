@@ -1,0 +1,15 @@
+<h1>いいねした出品一覧</h1>
+
+<%= link_to admin_user_path(@user) do %>
+  <p>
+    <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+    <%= @user.name %>
+  </p>
+<% end %>
+
+<% @user.favorites.each do |favorite| %>
+  <%= link_to admin_surprise_path(favorite) do %>
+    <%= attachment_image_tag favorite, :main_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+    <%= favorite.name %>
+  <% end %>
+<% end %>

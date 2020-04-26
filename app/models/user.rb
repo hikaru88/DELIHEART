@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :surprises, dependent: :destroy
   has_many :surprise_favorites, dependent: :destroy
+  has_many :favorites, through: :surprise_favorites, source: :surprise
   has_many :surprise_messages, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :order_messages, dependent: :destroy
