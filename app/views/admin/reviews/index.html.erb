@@ -1,0 +1,18 @@
+<h1>レビュー一覧ページ</h1>
+
+<%= link_to admin_user_path(@user) do %>
+  <p>
+    <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+    <%= @user.name %>
+  </p>
+<% end %>
+
+<% @user.to_user.each do |review| %>
+  <p>
+    <%= attachment_image_tag review.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+    <%= review.user.name %>
+  </p>
+  <p><%= review.score %></p>
+  <p><%= review.text %></p>
+  <p><%= link_to "削除", admin_reviews_delete_path(review), method: :delete %>
+<% end %>
