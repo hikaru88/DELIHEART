@@ -7,6 +7,7 @@ Admin.create!(
   User.create!(
     email: "user#{n + 1}@com",
     name: "ユーザー#{n + 1}",
+    phone_number: "00012345678",
     password: 'aaaaaa'
   )
 end
