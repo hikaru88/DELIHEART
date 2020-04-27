@@ -23,5 +23,7 @@ class User < ApplicationRecord
   has_many :send_review, through: :to_user, source: :from_user
   has_many :receive_review, through: :from_user, source: :to_user
 
+  accepts_nested_attributes_for :addresses, allow_destroy: true
+
   attachment :profile_image
 end

@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
+    t.string "phone_number", null: false
     t.text "introduction"
     t.string "profile_image_id"
     t.boolean "is_deleted", default: false, null: false

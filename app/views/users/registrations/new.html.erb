@@ -4,6 +4,28 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.fields_for :address do |address| %>
+      <h4>郵便番号</h4>
+      <%= address.text_field :postal_code, placeholder: "0000000" %>
+
+      <h4>住所</h4>
+      <%= address.select :prefecture, Address.prefectures.keys.to_a, include_blank: '都道府県' %><br>
+      <%= address.text_field :city, placeholder: "市区町村" %><br>
+      <%= address.text_field :after, placeholder: "以降の住所" %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
