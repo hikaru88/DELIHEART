@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     resource.addresses.build(
-      receiver: @user.name,
+      receiver: params[:user][:address][:receiver],
       postal_code: params[:user][:address][:postal_code],
       prefecture: params[:user][:address][:prefecture],
       city: params[:user][:address][:city],

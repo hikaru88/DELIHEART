@@ -1,0 +1,42 @@
+<h1>ユーザー詳細ページ</h1>
+
+<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: "100x100" %>
+<h3>ユーザー名：<%= @user.name %></h3>
+<p>自己紹介文：<%= @user.introduction %></p>
+<p>フォロー：<%= @user.following_user.count %></p>
+<p>フォロワー：<%= @user.follower_user.count %></p>
+<p>レビュー数：<%= link_to @user.to_user.count, reviews_path(@user) %></p>
+
+
+<h3>出品サプライズ一覧</h3>
+<% @user.surprises.each do |surprise| %>
+  <div>
+    <% unless surprise.order.nil? %>
+      <p>sold out</p>
+    <% end %>
+
+    <%= attachment_image_tag surprise, :main_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+
+    <h5><%= link_to surprise.name, surprise_path(surprise) %></h5>
+  </div>
+<% end %>
+
+
+<div>
+  <% if @user == current_user %>
+    <p><%= link_to "プロフィール編集", user_edit_path %></p>
+    <p><%= link_to "出品する", new_surprise_path %></p>
+    <p><%= link_to "いいねした出品", surprise_favorites_path(@user) %></p>
+    <p><%= link_to "配送先一覧", addresses_path %></p>
+    <p><%= link_to "退会する", user_delete_path %></p>
+
+    <h3>詳細情報</h3>
+    <p>氏名：<%= @default_address.receiver %></p>
+    <p>電話番号：<%= @user.phone_number %></p>
+    <p>メールアドレス：<%= @user.email %></p>
+    <p>郵便番号：<%= @default_address.postal_code %></p>
+    <p>都道府県：<%= @default_address.prefecture %></p>
+    <p>市区町村：<%= @default_address.city %></p>
+    <p>番地以下：<%= @default_address.after %></p>
+  <% end %>
+</div>

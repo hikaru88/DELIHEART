@@ -48,11 +48,11 @@ Rails.application.routes.draw do
 
     # users
     resources :users, only: [ :show ]
-    get    'users/edit', to: 'users#edit', as: 'user_edit'
-    patch  'users', to: 'users#update'
-    get    'users/delete', to: 'users#destory_confirm', as: 'user_delete'
-    patch  'users/delete', to: 'users#destroy'
-    get    'users/delete_complete', to: 'users#destroy_complete', as: 'user_delete_complete'
+    get    'user/edit', to: 'users#edit', as: 'user_edit'
+    patch  'user/edit', to: 'users#update'
+    get    'user/delete', to: 'users#destroy_confirm', as: 'user_delete'
+    patch  'user/delete', to: 'users#destroy'
+    get    'user/delete_complete', to: 'users#destroy_complete', as: 'user_delete_complete'
 
     # surprises
     resources :surprises, only: [ :index, :show, :new, :edit, :update, :destroy ]
@@ -76,7 +76,7 @@ Rails.application.routes.draw do
     post   ':order_id/order_messages', to: 'order_messages#create', as: 'order_messages' 
 
     # addresses
-    resources :addresses, only: [ :new, :edit, :create, :update, :destroy ]
+    resources :addresses, only: [ :new, :edit, :index, :create, :update, :destroy ]
 
     # notices
     resources :notices, only: [ :index, :show, :update ]
