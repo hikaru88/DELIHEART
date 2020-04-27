@@ -3,6 +3,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+  <h4>ユーザー名</h4>
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -10,6 +11,9 @@
 
   <div>
     <%= f.fields_for :address do |address| %>
+      <h4>氏名</h4>
+      <%= address.text_field :receiver, placeholder: "田中太郎" %>
+
       <h4>郵便番号</h4>
       <%= address.text_field :postal_code, placeholder: "0000000" %>
 
