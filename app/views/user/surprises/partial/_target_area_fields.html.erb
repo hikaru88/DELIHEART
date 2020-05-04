@@ -1,0 +1,6 @@
+<div class="nested-fields">
+  <div class="">
+    <%= f.select :name, TargetArea.names.keys.to_a %>
+    <%= link_to_remove_association "remove area", f %>
+  </div>
+</div>

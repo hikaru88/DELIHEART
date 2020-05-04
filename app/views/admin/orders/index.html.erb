@@ -2,5 +2,5 @@
 <% @orders.each do |order| %>
   <p>ID <%= order.id %></p>
   <p><%= l order.created_at, format: :short %><p>
-  <p><%= "サプライズ名：#{order.surprise.name}", admin_order_path(order) %>の取引</p>
+  <p><%= link_to "サプライズ名：#{order.surprise.name}", admin_order_path(order) %>の取引</p>
 <% end %>
