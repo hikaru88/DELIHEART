@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     get    'user/delete_complete', to: 'users#destroy_complete', as: 'user_delete_complete'
 
     # surprises
-    resources :surprises, only: [ :index, :show, :new, :edit, :update, :destroy ]
+    resources :surprises, only: [ :index, :create, :show, :new, :edit, :update, :destroy ]
     get    'surprises/delete_complete', to: 'surprises#destroy_complete', as: 'surprise_delete_complete'
 
     # surprise_favorites

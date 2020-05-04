@@ -1,0 +1,44 @@
+<h1>サプライズ編集ページ</h1>
+
+<% if @surprise.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <p><%= @surprise.errors.count %>errors</p>
+    <ul>
+      <% @surprise.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @surprise, local: true, url: surprise_path) do |f| %>
+  <p>サプライズ名：<%= f.text_field :name %></p>
+  <p>サプライズ説明：<%= f.text_area :description %></p>
+  <p>価格：<%= f.text_field :price %></p>
+  <p>実施年：<%= f.text_field :year %></p>
+  <p>実施月：<%= f.text_field :month %></p>
+  <p>実施日：<%= f.text_field :day %></p>
+  <p>送料：<%= f.select :postage, Surprise.postages.keys.to_a, include_blank: '選択してください' %>
+  <p>画像：<%= f.attachment_field :main_image %></p>
+
+  
+  <div>
+    <%= f.fields_for :surprise_images do |image| %>
+      <%= render 'user/surprises/partial/image_fields', f: image %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association "add image", f, :surprise_images, partial: "user/surprises/partial/image_fields" %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.fields_for :target_areas do |area| %>
+      <%= render 'user/surprises/partial/target_area_fields', f: area %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association "add area", f, :target_areas, partial: "user/surprises/partial/target_area_fields" %>
+    </div>
+  </div>
+
+  <p><%= f.submit "編集する" %></p>
+<% end %>

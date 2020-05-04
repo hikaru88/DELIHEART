@@ -8,6 +8,7 @@ class Surprise < ApplicationRecord
   belongs_to :user
 
   accepts_nested_attributes_for :target_areas, allow_destroy: true
+  accepts_nested_attributes_for :surprise_images, allow_destroy: true
   attachment :main_image
 
   def days

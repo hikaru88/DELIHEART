@@ -1,13 +1,7 @@
-<h1>サプライズ詳細</h1>
+<h1>エンドユーザサプライズ詳細ページ</h1>
 
 <% unless @surprise.order.nil? %>
   <p>sold out</p>
-<% end %>
-
-<% if @surprise.is_active == true %>
-  <p>出品中</p>
-<% else %>
-  <p>出品停止中</p>
 <% end %>
 
 <%= attachment_image_tag @surprise, :main_image, :fill, 100, 100, fallback: "no_image.jpg", size: "100x100" %>
@@ -15,7 +9,7 @@
   <%= attachment_image_tag sub_image, :image, :fill, 100, 100, size: "100x100" %>
 <% end %>
 
-<%= link_to admin_user_path(@surprise.user) do %>
+<%= link_to user_path(@surprise.user) do %>
   <p>
     <%= attachment_image_tag @surprise.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: "40x40" %> 
     <%= @surprise.user.name %>
@@ -41,10 +35,16 @@
   <%= comment.text %>
 <% end %>
 
-<% if @surprise.is_active == true %>
-  <%= link_to "出品停止", admin_surprise_path(@surprise, flag: true), method: :patch %>
-<% else %>
-  <%= link_to "出品再開", admin_surprise_path(@surprise, flag: false), method: :patch %>
-<% end %>
+<% if @surprise.user == current_user %>
+  <%= link_to "編集する", edit_surprise_path(@surprise) %>
 
-<%= link_to "削除", admin_surprise_path(@surprise), method: :delete %>
+  <% if @surprise.is_active == true %>
+    <%= link_to "出品停止", surprise_path(@surprise, flag: true), method: :patch %>
+  <% else %>
+    <%= link_to "出品再開", surprise_path(@surprise, flag: false), method: :patch %>
+  <% end %>
+
+  <%= link_to "削除", surprise_path(@surprise), method: :delete %>
+<% else %>
+  <%= link_to "購入する", new_order_path %>
+<% end %>

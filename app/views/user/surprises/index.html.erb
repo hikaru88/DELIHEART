@@ -1,0 +1,15 @@
+<h1>エンドユーザサプライズ一覧ページ</h1>
+
+<div>
+  <% @surprises.each do |surprise| %>
+    <div>
+      <% unless surprise.order.nil? %>
+        <p>sold out</p>
+      <% end %>
+
+      <%= attachment_image_tag surprise, :main_image, :fill, 100, 100, fallback: "no_image.jpg", size: "100x100" %>
+
+      <h3><%= link_to surprise.name, surprise_path(surprise) %></h3>
+    </div>
+  <% end %>
+</div>
