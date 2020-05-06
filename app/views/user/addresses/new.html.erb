@@ -1,0 +1,11 @@
+<h1>新規住所登録ページ</h1>
+
+<%= form_with(model: @address_new, local: true, url: addresses_path) do |f| %>
+  <p>受取人：<%= f.text_field :receiver, placeholder: "田中太郎" %></p>
+  <p>郵便番号：<%= f.text_field :postal_code, placeholder: "0000000" %></p>
+  <p>住所：</p>
+  <p><%= f.select :prefecture, Address.prefectures.keys.to_a, include_blank: '都道府県' %></p>
+  <p><%= f.text_field :city, placeholder: "市区町村" %></p>
+  <p><%= f.text_field :after, placeholder: "以降の住所" %></p>
+  <p><%= f.submit "登録" %></p>
+<% end %>

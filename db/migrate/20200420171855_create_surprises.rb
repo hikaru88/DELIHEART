@@ -5,9 +5,6 @@ class CreateSurprises < ActiveRecord::Migration[5.2]
       t.string :name, index: true, null: false
       t.text :description
       t.integer :price, null: false
-      t.integer :year, null: false
-      t.integer :month, null: false
-      t.integer :day, null: false
       t.boolean :is_active, default: true, null: false
       t.string :main_image_id
       t.integer :postage, null: false

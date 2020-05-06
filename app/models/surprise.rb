@@ -11,9 +11,6 @@ class Surprise < ApplicationRecord
   accepts_nested_attributes_for :surprise_images, allow_destroy: true
   attachment :main_image
 
-  def days
-    "#{self.year}年 / #{self.month}月 / #{self.day}日"
-  end
 
   enum postage: {
     出品者負担: 0,

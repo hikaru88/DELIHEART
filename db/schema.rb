@@ -125,9 +125,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
     t.string "name", null: false
     t.text "description"
     t.integer "price", null: false
-    t.integer "year", null: false
-    t.integer "month", null: false
-    t.integer "day", null: false
     t.boolean "is_active", default: true, null: false
     t.string "main_image_id"
     t.integer "postage", null: false

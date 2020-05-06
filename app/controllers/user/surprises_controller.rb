@@ -59,7 +59,7 @@ class User::SurprisesController < ApplicationController
 
   private
     def surprise_params
-      params.require(:surprise).permit(:name, :description, :price, :year, :month, :day, :main_image, :postage, target_areas_attributes: [:id, :name], surprise_images_attributes: [:id, :image])
+      params.require(:surprise).permit(:name, :description, :price, :main_image, :postage, target_areas_attributes: [:id, :name], surprise_images_attributes: [:id, :image])
     end
   
 end
