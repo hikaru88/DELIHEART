@@ -69,8 +69,9 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
     t.integer "surprise_id"
     t.integer "payment_method", null: false
     t.integer "status", default: 0, null: false
-    t.string "address", null: false
     t.string "postal_code", null: false
+    t.string "receiver", null: false
+    t.string "address", null: false
     t.string "surprise_name", null: false
     t.string "surprise_image_id"
     t.datetime "created_at", null: false

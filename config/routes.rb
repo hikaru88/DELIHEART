@@ -68,9 +68,11 @@ Rails.application.routes.draw do
     delete 'surprise_messages/:id', to: 'surprise_messages#destroy'
 
     # orders
-    resources :orders, only: [ :new, :show, :index, :create ]
-    get    'orders/confirm', to: 'orders#confirm', as: 'order_confirm'
-    get    'orders/complete', to: 'orders#complete', as: 'order_complete'
+    resources :orders, only: [ :show, :index, :create, :update ]
+    get    ':surprise_id/orders/new', to: 'orders#new', as: 'order_new'
+    post   'orders/new', to: 'orders#create_session', as: 'new_order'
+    get    'order/confirm', to: 'orders#confirm', as: 'order_confirm'
+    get    'order/complete', to: 'orders#complete', as: 'order_complete'
 
     # order_messages
     post   ':order_id/order_messages', to: 'order_messages#create', as: 'order_messages' 

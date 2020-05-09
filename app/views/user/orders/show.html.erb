@@ -1,0 +1,65 @@
+<h1>取引詳細</h1>
+
+<div>
+  <% if @order.status == "入金待ち" && @buyer.id == current_user.id %>
+    <p>入金してください。</p>
+    <p><%= link_to "入金完了", order_path(@order), method: :patch %></p>
+  <% elsif @order.status == "入金待ち" && @seller.id == current_user.id %>
+    <p>入金されるまでお待ちください。</p>
+  <% elsif @order.status == "発送待ち（サプライズ準備中）" && @buyer.id == current_user.id %>
+    <p>発送されるまでお待ちください。</p>
+  <% elsif @order.status == "発送待ち（サプライズ準備中）" && @seller.id == current_user.id %>
+    <p>商品を発送してください。</p>
+    <p><%= link_to "発送完了", order_path(@order), method: :patch %>
+  <% elsif @order.status == "配達中（サプライズ実施前）" && @buyer.id == current_user.id %>
+    <p>商品が発送されました。商品到着後、出品者の評価をお願いします。</p>
+    <%= form_with(model: @review_new, local: true, url: reviews_path(@seller)) do |f| %>
+      <p><%= f.select :score, [1, 2, 3, 4, 5] %></p>
+      <p><%= f.text_area :text %></p>
+      <p><%= f.submit "送信する" %></p>
+    <% end %>
+  <% elsif @order.status == "配達中（サプライズ実施前）" && @seller.id == current_user.id %>
+    <p>商品を発送しました。購入者の評価をお待ちください。</p>
+  <% elsif @order.status == "購入者、レビュー済" && @buyer.id == current_user.id %>
+    <p>出品者の評価をお待ちください。</p>
+  <% elsif @order.status == "購入者、レビュー済" && @seller.id == current_user.id %>
+    <p>購入者を評価してください。</p>
+    <%= form_with(model: @review_new, local: true, url: reviews_path(@buyer)) do |f| %>
+      <p><%= f.select :score, [1, 2, 3, 4, 5] %></p>
+      <p><%= f.text_area :text %></p>
+      <p><%= f.submit "送信する" %></p>
+    <% end %>
+  <% elsif @order.status == "取引完了" %>
+    <p>取引は終了しました。</p>
+  <% end %>
+</div>
+
+<div>
+  <% if @seller.id == current_user.id %>
+    <p>購入者情報</p>
+    <p><%= link_to @buyer.name, user_path(@buyer) %></p>
+    <p><%= @buyer.addresses.find_by(is_default: true).address_full %></p>
+  <% else %>
+    <p>出品者情報</p>
+    <p><%= link_to @seller.name, user_path(@seller) %></p>
+  <% end %>
+</div>
+
+<div>
+  <h4>取引メッセージ</h4>
+  <% @order.order_messages.each do |message| %>
+    <p>
+      <%= l message.created_at, format: :short %>
+      <%= message.user.name %>
+      <%= message.text %>
+    </p>
+  <% end %>
+</div>
+
+<div>
+  <h4>メッセージ作成</h4>
+  <%= form_with(model: @order_message_new, local: true, url: order_messages_path(@order)) do |f| %>
+    <%= f.text_area :text %>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>

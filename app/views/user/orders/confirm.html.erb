@@ -1,0 +1,16 @@
+<h1>購入情報確認画面</h1>
+
+<h3>サプライズ内容</h3>
+<%= attachment_image_tag @surprise, :main_image, :fill, 100, 100, fallback: "no_image.jpg", size: "100x100" %>
+<p>サプライズ名： <%= @surprise.name %></p>
+<p>送料： <%= @surprise.postage %></p>
+
+<h3>お届け先住所</h3>
+<p>〒<%= @order["postal_code"] %></p>
+<p><%= @order["receiver"] %></p>
+<p><%= @order["address"] %></p>
+
+<p>支払い方法： <%= @order["payment_method"] %>
+<p>お支払い金額： <%= @surprise.price %></p>
+
+<p><%= link_to "購入を確定する", orders_path, method: :post %></p>
