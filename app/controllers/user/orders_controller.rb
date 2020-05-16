@@ -70,6 +70,7 @@ class User::OrdersController < ApplicationController
   end
 
   def complete
+    # いらないんじゃね？
   end
 
   private

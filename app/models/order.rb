@@ -11,8 +11,7 @@ class Order < ApplicationRecord
 	  入金待ち: 0,
     発送待ち（サプライズ準備中）: 1,
     配達中（サプライズ実施前）: 2,
-    購入者、レビュー済: 3,
-    取引完了: 4
+    取引完了: 3
   }
 
   enum payment_method: {

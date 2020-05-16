@@ -1,36 +1,35 @@
 <h1>取引詳細</h1>
 
 <div>
-  <% if @order.status == "入金待ち" && @buyer.id == current_user.id %>
-    <p>入金してください。</p>
-    <p><%= link_to "入金完了", order_path(@order), method: :patch %></p>
-  <% elsif @order.status == "入金待ち" && @seller.id == current_user.id %>
-    <p>入金されるまでお待ちください。</p>
-  <% elsif @order.status == "発送待ち（サプライズ準備中）" && @buyer.id == current_user.id %>
-    <p>発送されるまでお待ちください。</p>
-  <% elsif @order.status == "発送待ち（サプライズ準備中）" && @seller.id == current_user.id %>
-    <p>商品を発送してください。</p>
-    <p><%= link_to "発送完了", order_path(@order), method: :patch %>
-  <% elsif @order.status == "配達中（サプライズ実施前）" && @buyer.id == current_user.id %>
-    <p>商品が発送されました。商品到着後、出品者の評価をお願いします。</p>
-    <%= form_with(model: @review_new, local: true, url: reviews_path(@seller)) do |f| %>
-      <p><%= f.select :score, [1, 2, 3, 4, 5] %></p>
-      <p><%= f.text_area :text %></p>
-      <p><%= f.submit "送信する" %></p>
+  <% if @order.status == "入金待ち" %>
+    <% if current_user.id == @buyer.id %>
+      <p>入金してください。</p>
+      <p><%= link_to "入金完了", order_path(@order), method: :patch %></p>
+    <% elsif current_user.id == @seller.id %>
+      <p>入金されるまでお待ちください</p>
     <% end %>
-  <% elsif @order.status == "配達中（サプライズ実施前）" && @seller.id == current_user.id %>
-    <p>商品を発送しました。購入者の評価をお待ちください。</p>
-  <% elsif @order.status == "購入者、レビュー済" && @buyer.id == current_user.id %>
-    <p>出品者の評価をお待ちください。</p>
-  <% elsif @order.status == "購入者、レビュー済" && @seller.id == current_user.id %>
-    <p>購入者を評価してください。</p>
-    <%= form_with(model: @review_new, local: true, url: reviews_path(@buyer)) do |f| %>
-      <p><%= f.select :score, [1, 2, 3, 4, 5] %></p>
-      <p><%= f.text_area :text %></p>
-      <p><%= f.submit "送信する" %></p>
+  <% elsif @order.status == "発送待ち（サプライズ準備中）" %>
+    <% if current_user.id == @buyer.id %>
+      <p>発送されるまでお待ちください。</p>
+    <% elsif current_user.id == @seller.id %>
+      <p>商品を発送してください。</p>
+      <p><%= link_to "発送完了", order_path(@order), method: :patch %>
+    <% end %>
+  <% elsif @order.status == "配達中（サプライズ実施前）" %>
+    <% if current_user.id == @buyer.id %>
+      <p>商品が発送されました。商品到着後、以下のボタンを押して取引を完了してください。</p>
+      <p><%= link_to "商品を受け取りました。取引を完了します。", order_path(@order), method: :patch %></p>
+    <% elsif current_user.id == @seller.id %>
+      <p>商品を発送しました。購入者が取引を完了するまでお待ちください。</p>
     <% end %>
   <% elsif @order.status == "取引完了" %>
-    <p>取引は終了しました。</p>
+    <% if current_user.id == @buyer.id %>
+      <p>取引は終了しました。</p>
+      <p><%= link_to "出品者にお礼のメッセージを送信する", reviews_new_path(@seller) %></p>
+    <% elsif current_user.id == @seller.id %>
+      <p>取引は終了しました。</p>
+      <p><%= link_to "購入者にお礼のメッセージを送信する", reviews_new_path(@buyer) %></p>
+    <% end %>
   <% end %>
 </div>
 
@@ -61,5 +60,11 @@
   <%= form_with(model: @order_message_new, local: true, url: order_messages_path(@order)) do |f| %>
     <%= f.text_area :text %>
     <%= f.submit "送信" %>
+  <% end %>
+</div>
+
+<div>
+  <% if @order.status == "入金待ち" %>
+    <%= link_to "取引をキャンセルする", cancel_requests_new_path(@order) %>
   <% end %>
 </div>
