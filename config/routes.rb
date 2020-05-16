@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     registrations:  'users/registrations'
   }
 
+  root to: 'user/surprises#index'
+
 
   namespace :admin do
 
