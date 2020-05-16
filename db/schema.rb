@@ -91,8 +91,9 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
   create_table "reviews", force: :cascade do |t|
     t.integer "from_user_id"
     t.integer "to_user_id"
-    t.text "text"
-    t.integer "score", null: false
+    t.string "title", null: false
+    t.text "text", null: false
+    t.string "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["from_user_id"], name: "index_reviews_on_from_user_id"

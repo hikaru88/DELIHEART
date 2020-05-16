@@ -1,0 +1,5 @@
+<h1><%= @user.name %>さんへのレビュー一覧</h1>
+
+<% @user.receive_review.each do |review| %>
+  <%= link_to review.title, review_path(review) %>
+<% end %>

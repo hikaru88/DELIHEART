@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     delete ':user_id/relationships', to: 'relationships#destroy'
 
     # reviews
+    get    'reviews/:id', to: 'reviews#show', as: 'review'
     get    ':user_id/reviews', to: 'reviews#index', as: 'reviews'
     post   ':user_id/reviews', to: 'reviews#create'
     get    ':user_id/reviews/new', to: 'reviews#new', as: 'reviews_new'

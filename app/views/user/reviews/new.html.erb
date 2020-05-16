@@ -1,0 +1,8 @@
+<h1>レビュー新規作成</h1>
+
+<%= form_with(model: @review_new, local: true, url: reviews_path(@user)) do |f| %>
+  <%= f.attachment_field :image %>
+  <p>タイトル： <%= f.text_field :title %></p>
+  <p>本文： <%= f.text_area :text %></p>
+  <%= f.submit "送信" %>
+<% end %>
