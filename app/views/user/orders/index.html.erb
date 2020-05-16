@@ -1,0 +1,25 @@
+<h1>購入した出品</h1>
+
+<div>
+  <h4>取引中</h4>
+  <% @orders.where.not(status: "取引完了").each do |order| %>
+    <%= link_to order_path(order) do %>
+      <p>
+        <%= attachment_image_tag order, :surprise_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+        <%= order.surprise_name %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <h4>過去の取引</h4>
+  <% @orders.where(status: "取引完了").each do |order| %>
+    <%= link_to order_path(order) do %>
+      <p>
+        <%= attachment_image_tag order, :surprise_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+        <%= order.surprise_name %>
+      </p>
+    <% end %>
+  <% end %>
+</div>

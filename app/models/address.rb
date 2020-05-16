@@ -50,4 +50,12 @@ class Address < ApplicationRecord
     鹿児島県: 45,
     沖縄県: 46
   }
+
+  def address_full
+    # 改行が！！！！！できん！！！！！！！！！！！
+    "#{self.receiver}\n" +
+    "〒#{self.postal_code}\n" + 
+    "#{self.prefecture} #{self.city}\n" + 
+    "#{self.after}"
+  end
 end

@@ -45,5 +45,5 @@
 
   <%= link_to "削除", surprise_path(@surprise), method: :delete %>
 <% else %>
-  <%= link_to "購入する", new_order_path %>
+  <%= link_to "購入する", order_new_path(@surprise) %>
 <% end %>
