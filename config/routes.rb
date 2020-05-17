@@ -67,7 +67,7 @@ Rails.application.routes.draw do
 
     # surprise_messages
     post   ':surprise_id/surprise_messages', to: 'surprise_messages#create', as: 'surprise_messages'
-    delete 'surprise_messages/:id', to: 'surprise_messages#destroy'
+    delete 'surprise_messages/:id', to: 'surprise_messages#destroy', as: 'surprise_message'
 
     # orders
     resources :orders, only: [ :show, :index, :create, :update ]
