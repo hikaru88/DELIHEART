@@ -36,10 +36,21 @@
 </p>
 
 <h3>コメント一覧</h3>
-<% @surprise.surprise_messages.each do |comment| %>
-  <%= l comment.created_at, format: :short %>
-  <%= comment.user.name %>
-  <%= comment.text %>
+<% @surprise.surprise_messages.each do |message| %>
+  <p>
+    <%= l message.created_at, format: :short %>
+    <%= message.user.name %>
+    <%= message.text %>
+
+    <% if message.user == current_user || @surprise.user == current_user %>
+      <%= link_to "削除", surprise_message_path(message), method: :delete %>
+    <% end %>
+  </p>
+<% end %>
+
+<%= form_with(model: @surprise_message_new, local: true, url: surprise_messages_path(@surprise)) do |f| %>
+  <%= f.text_area :text %>
+  <%= f.submit "送信" %>
 <% end %>
 
 <% if @surprise.user == current_user %>

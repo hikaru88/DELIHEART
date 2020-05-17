@@ -5,6 +5,7 @@ class User::SurprisesController < ApplicationController
 
   def show
     @surprise = Surprise.find(params[:id])
+    @surprise_message_new = SurpriseMessage.new
     # サプライズ詳細画面を開くたびにview側でif文を動かしたくない。
     # あとで「お探しの商品は見つかりません」ページを作る。
     # if @surprise.is_active == false
