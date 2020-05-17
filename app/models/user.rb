@@ -40,10 +40,11 @@ class User < ApplicationRecord
 
   has_many :following_user, through: :followed, source: :followed
   has_many :follower_user, through: :follower, source: :follower
-  has_many :from_user, class_name: "Review", foreign_key: "from_user_id", dependent: :nullify
-  has_many :to_user, class_name: "Review", foreign_key: "to_user_id", dependent: :destroy
-  has_many :send_review, through: :to_user, source: :from_user
-  has_many :receive_review, through: :from_user, source: :to_user
+  # has_many :send_review, class_name: "Review", foreign_key: "from_user_id", dependent: :nullify
+  has_many :send_review, class_name: "Review", foreign_key: "from_user_id", dependent: :nullify
+  has_many :receive_review, class_name: "Review", foreign_key: "to_user_id", dependent: :destroy
+  # has_many :send_review, through: :to_user, source: :from_user
+  # has_many :receive_review, through: :to_user, source: :to_user
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
 

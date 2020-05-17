@@ -3,8 +3,9 @@ class CreateReviews < ActiveRecord::Migration[5.2]
     create_table :reviews do |t|
       t.integer :from_user_id
       t.integer :to_user_id
-      t.text :text
-      t.integer :score, null: false
+      t.string :title, null: false
+      t.text :text, null: false
+      t.string :image_id
 
       t.timestamps
     end

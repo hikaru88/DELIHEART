@@ -1,0 +1,12 @@
+<h1>レビュー詳細</h1>
+
+<div>
+  <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
+  <%= link_to @user.name, user_path(@user) %>
+</div>
+
+<div>
+  <%= attachment_image_tag @review, :image, :fill, 100, 100, fallback: "no_image.jpg", size: "100x100" %>
+  <h3><%= @review.title %></h3>
+  <p><%= @review.text %></p>
+</div>
