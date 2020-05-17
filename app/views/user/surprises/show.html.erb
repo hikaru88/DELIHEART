@@ -16,6 +16,14 @@
   </p>
 <% end %>
 
+<% if @surprise.user != current_user %>
+  <% if @surprise.is_favorite?(current_user) %>  
+    <%= link_to "いいね解除", surprise_favorites_path(@surprise), method: :delete %>
+  <% else %>
+    <%= link_to "いいね", surprise_favorites_path(@surprise), method: :post %>
+  <% end %>
+<% end %>
+
 <h3>サプライズ名：<%= @surprise.name %></h3>
 <p>サプライズ説明：<%= @surprise.description %></p>
 <p>価格：<%= @surprise.price %></p>

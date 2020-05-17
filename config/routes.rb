@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     # surprise_favorites
     get    'users/:user_id/surprise_favorites', to: 'surprise_favorites#index', as: 'surprise_favorites'
     post   'users/:surprise_id/surprise_favorites', to: 'surprise_favorites#create'
-    delete 'users/surprise_favorites/:id', to: 'surprise_favorites#destroy'
+    delete 'users/:surprise_id/surprise_favorites', to: 'surprise_favorites#destroy'
 
     # surprise_messages
     post   ':surprise_id/surprise_messages', to: 'surprise_messages#create', as: 'surprise_messages'

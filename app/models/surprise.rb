@@ -16,4 +16,8 @@ class Surprise < ApplicationRecord
     出品者負担: 0,
     購入者負担: 1
   }
+
+  def is_favorite?(user)
+    surprise_favorites.where(user_id: user.id).present?
+  end
 end
