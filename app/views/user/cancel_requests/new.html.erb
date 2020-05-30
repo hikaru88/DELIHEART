@@ -1,0 +1,8 @@
+<h1>キャンセルリクエスト作成ページ</h1>
+<h3><%= @order.surprise.name %>に対するキャンセルリクエスト</h3>
+
+<%= form_with(model: @cancel_request_new, local: true, url: cancel_requests_path(order_id: @order.id), method: :post) do |f| %>
+  <h3>キャンセル理由を入力してください</h3>
+  <%= f.text_area :reason %>
+  <%= f.submit "送信する" %>
+<% end %>
