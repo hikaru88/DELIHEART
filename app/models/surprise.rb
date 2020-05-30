@@ -3,6 +3,7 @@ class Surprise < ApplicationRecord
   has_many :surprise_favorites, dependent: :destroy
   has_many :surprise_images, dependent: :destroy
   has_many :target_areas, dependent: :destroy
+  has_many :chat_rooms, dependent: :destroy
 
   belongs_to :user
 
