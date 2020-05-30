@@ -33,13 +33,6 @@
   <% end %>
 </p>
 
-<h3>コメント一覧</h3>
-<% @surprise.surprise_messages.each do |comment| %>
-  <%= l comment.created_at, format: :short %>
-  <%= comment.user.name %>
-  <%= comment.text %>
-<% end %>
-
 <% if @surprise.is_active == true %>
   <%= link_to "出品停止", admin_surprise_path(@surprise, flag: true), method: :patch %>
 <% else %>
