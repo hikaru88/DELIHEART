@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :notices, dependent: :destroy
   has_many :reviews
+  has_many :chat_rooms, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
     # followerと言う仮想モデルを指定。オプションでforeign_key: "followed_id"を指定することで、
     # user.follower

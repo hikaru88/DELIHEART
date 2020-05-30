@@ -43,6 +43,10 @@ Rails.application.routes.draw do
     # cancel_requests
     resources :cancel_requests, only: [ :index, :show ]
     get    'cancel_requests/:id/reject', to: 'cancel_requests#reject'
+
+    # chat_rooms
+    get    ':surprise_id/chat_rooms', to: 'chat_rooms#index', as: 'chat_rooms'
+    get    'chat_room/:id', to: 'chat_rooms#show', as: 'chat_room'
   end
 
 
@@ -95,5 +99,12 @@ Rails.application.routes.draw do
     get    ':order_id/cancel_requests/new', to: 'cancel_requests#new', as: 'cancel_requests_new'
     post   ':order_id/cancel_requests', to: 'cancel_requests#create', as: 'cancel_requests'
     get    'cancel_requests/success', to: 'cancel_requests#success', as: 'cancel_requests_success'
+
+    # chat_rooms
+    get    ':surprise_id/chat_rooms', to: 'chat_rooms#index', as: 'chat_rooms'
+    post   ':surprise_id/chat_rooms', to: 'chat_rooms#create'
+    get    'chat_room/:id', to: 'chat_rooms#show', as: 'chat_room'
+    post   'chat_room/:id', to: 'chat_rooms#create_message'
+    patch  'chat_room/:id', to: 'chat_rooms#update'
   end
 end
