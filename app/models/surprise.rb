@@ -1,7 +1,6 @@
 class Surprise < ApplicationRecord
-  has_one :order, dependent: :nullify
+  has_many :order, dependent: :nullify
   has_many :surprise_favorites, dependent: :destroy
-  has_many :surprise_messages, dependent: :destroy
   has_many :surprise_images, dependent: :destroy
   has_many :target_areas, dependent: :destroy
 
