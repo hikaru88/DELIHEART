@@ -4,23 +4,34 @@
 <h3>ユーザー名：<%= @user.name %></h3>
 <p>自己紹介文：<%= @user.introduction %></p>
 <p>フォロー：<%= @user.following_user.count %></p>
-<p>フォロワー：<%= @user.follower_user.count %></p>
-<p>レビュー数：<%= link_to @user.to_user.count, reviews_path(@user) %></p>
+<p>フォロワー：<%= @user.followed_user.count %></p>
+<p>レビュー数：<%= link_to @user.receive_review.count, reviews_path(@user) %></p>
 
-<% if @user.id != current_user.id %>
-  <% if @user.is_follow?(current_user) %>
-    <%= link_to "フォロー解除", relationships_path(@user), method: :delete %>
-  <% else %>
-    <%= link_to "フォローする", relationships_path(@user), method: :post %>
-  <% end %>
+<% if @user.is_block?(current_user) %>
+  <%= link_to "ブロック解除", unblock_path(@user), method: :delete %>
+<% else %>
+  <%= link_to "ブロックする", block_path(@user), method: :post %>
 <% end %>
 
+<% if @user.id != current_user.id %>
+  <% if current_user.is_block?(@user) %>
+    <p>ブロックされています</p>
+  <% elsif @user.is_block?(current_user) %>
+    <p>ブロックしています</p>
+  <% else %>
+    <% if @user.is_follow?(current_user) %>
+      <%= link_to "フォロー解除", unfollow_path(@user), method: :delete %>
+    <% else %>
+      <%= link_to "フォローする", follow_path(@user), method: :post %>
+    <% end %>
+  <% end %>
+<% end %>
 
 <h3>出品サプライズ一覧</h3>
 <% @user.surprises.each do |surprise| %>
   <div>
-    <% unless surprise.order.nil? %>
-      <p>sold out</p>
+    <% if surprise.is_active == false %>
+      <p>出品停止中</p>
     <% end %>
 
     <%= attachment_image_tag surprise, :main_image, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %>
