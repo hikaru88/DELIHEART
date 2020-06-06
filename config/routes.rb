@@ -86,8 +86,10 @@ Rails.application.routes.draw do
     resources :notices, only: [ :index, :show, :update ]
 
     # relationships
-    post   ':user_id/relationships', to: 'relationships#create', as: 'relationships'
-    delete ':user_id/relationships', to: 'relationships#destroy'
+    post   ':user_id/follow', to: 'relationships#follow', as: 'follow'
+    delete ':user_id/unfollow', to: 'relationships#unfollow', as: 'unfollow'
+    post   ':user_id/block', to: 'relationships#block', as: 'block'
+    delete ':user_id/unblock', to: 'relationships#unblock', as: 'unblock'
 
     # reviews
     get    'reviews/:id', to: 'reviews#show', as: 'review'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_172532) do
+ActiveRecord::Schema.define(version: 2020_05_30_155517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,22 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chat_rooms", force: :cascade do |t|
+    t.integer "surprise_id"
+    t.integer "user_id"
+    t.boolean "is_available", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "chat_room_id"
+    t.integer "user_id"
+    t.text "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notices", force: :cascade do |t|
     t.integer "user_id"
     t.string "title", null: false
@@ -79,13 +95,14 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+    t.integer "active_id"
+    t.integer "passive_id"
+    t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.index ["active_id", "passive_id"], name: "index_relationships_on_active_id_and_passive_id", unique: true
+    t.index ["active_id"], name: "index_relationships_on_active_id"
+    t.index ["passive_id"], name: "index_relationships_on_passive_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -110,14 +127,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
   create_table "surprise_images", force: :cascade do |t|
     t.integer "surprise_id"
     t.string "image_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "surprise_messages", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "surprise_id"
-    t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -171,8 +180,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_172532) do
   add_foreign_key "surprise_favorites", "surprises"
   add_foreign_key "surprise_favorites", "users"
   add_foreign_key "surprise_images", "surprises"
-  add_foreign_key "surprise_messages", "surprises"
-  add_foreign_key "surprise_messages", "users"
   add_foreign_key "surprises", "users"
   add_foreign_key "target_areas", "surprises"
 end
