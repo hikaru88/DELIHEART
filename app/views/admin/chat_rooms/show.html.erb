@@ -1,0 +1,11 @@
+<h1>チャットルーム詳細(出品者と購入者の実際のやりとり)</h1>
+
+<h1>出品者：<%= link_to @seller.name, admin_user_path(@seller) %>さん</h1>
+<h1>購入者：<%= @buyer.name, admin_user_path(@buyer) %>さん</h1>
+<h1>商品：<%= @chat_room.surprise.name, admin_surprise_path(@chat_room.surprise) %></h1>
+
+<% @chat_room.messages.each do |message| %>
+  <p><%= l message.created_at, format: :short %></p>
+  <p><%= message.user.name %></p>
+  <p><%= message.text %></p>
+<% end %>

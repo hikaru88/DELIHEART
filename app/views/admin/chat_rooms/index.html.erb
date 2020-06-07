@@ -1,0 +1,7 @@
+<h1>特定の出品に紐づいたチャットルーム一覧</h1>
+
+<h1><%= @surprise.user.name %>さんの<%= @surprise.name %>についてのDM一覧</h1>
+
+<% @surprise.chat_rooms.each do |chat_room| %>
+  <%= link_to "#{chat_room.user.name}さんとのDM", admin_chat_room_path(chat_room) %>
+<% end %>
